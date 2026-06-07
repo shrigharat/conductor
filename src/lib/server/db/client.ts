@@ -1,19 +1,20 @@
 import { MONGO_URL } from '$env/static/private';
-import { MongoClient } from 'mongodb';
+import mongoose from 'mongoose';
 
-const globalForMongo = global as typeof global & {
-	_mongoClient: MongoClient | undefined;
-};
+let isConnected = false;
 
-if (!globalForMongo._mongoClient) {
-	console.log('Connecting to MongoDB...');
-	globalForMongo._mongoClient = new MongoClient(MONGO_URL, {
-		authSource: 'admin'
-	});
-	await globalForMongo._mongoClient.connect();
-	console.log('MongoDB connected');
-} else {
-	console.log('MongoDB already connected');
+export async function connectDB() {
+	if (isConnected) return;
+
+	try {
+		console.log('Connecting to MongoDB...');
+		await mongoose.connect(MONGO_URL, {
+			authSource: 'admin'
+		});
+		isConnected = true;
+		console.log('MongoDB connected');
+	} catch (error) {
+		console.error('MongoDB connection failed:', error);
+		process.exit(1);
+	}
 }
-
-export const mongoClient = globalForMongo._mongoClient;
