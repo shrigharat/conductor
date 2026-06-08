@@ -5,6 +5,7 @@ import { User } from '$lib/server/db/models/user';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET, ENVIRONMENT_TYPE } from '$env/static/private';
+import { getRedisClient } from '$lib/server/redis/client';
 
 export const actions: Actions = {
 	default: async ({ request, cookies }) => {
@@ -53,6 +54,13 @@ export const actions: Actions = {
 				path: '/',
 				maxAge: 60 * 60 * 24 * 30, // 30 days
 				sameSite: 'lax'
+			});
+			const redisClient = await getRedisClient();
+			await redisClient.set(`refresh:${user._id}`, refreshToken, {
+				expiration: {
+					type: 'EX',
+					value: 60 * 60 * 24 * 30 // 30 days
+				}
 			});
 			return { success: true, message: 'Login successful' };
 		} catch (error: unknown) {
