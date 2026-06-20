@@ -5,7 +5,6 @@
 	import type { PageProps } from './$types';
 
 	let { form }: PageProps = $props();
-	console.log(form);
 </script>
 
 <div class="flex h-screen flex-col items-center justify-center bg-background">
@@ -35,8 +34,8 @@
 			<Button type="submit">Login</Button>
 		</form>
 		<p class="mt-4 text-center text-sm text-muted-foreground">
-			Don't have an account? <a href={resolve('/register')} data-sveltekit-preload-code="hover"
-				>Register</a
+			Don't have an account? <Button href={resolve('/register')} data-sveltekit-preload-code="hover"
+				>Register</Button
 			>
 		</p>
 	</div>

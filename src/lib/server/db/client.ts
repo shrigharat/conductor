@@ -8,6 +8,7 @@ export async function connectDB() {
 
 	try {
 		console.log('Connecting to MongoDB...');
+		console.log(MONGO_URL);
 		await mongoose.connect(MONGO_URL, {
 			authSource: 'admin'
 		});

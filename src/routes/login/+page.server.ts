@@ -14,7 +14,6 @@ export const actions: Actions = {
 		const password = formData.get('password')?.toString() ?? '';
 		const parsed = UserLoginSchema.safeParse({ email, password });
 		if (!parsed.success) {
-			console.log(parsed.error);
 			return fail(400, {
 				message: 'Invalid form data',
 				error: parsed.error.message,
@@ -23,7 +22,6 @@ export const actions: Actions = {
 		}
 		try {
 			const user = await User.findOne({ username: parsed.data.email });
-			console.log(user);
 			if (!user) {
 				return fail(404, {
 					message: 'User with this email does not exist',
