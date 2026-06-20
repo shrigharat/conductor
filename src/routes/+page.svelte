@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
+
 	const features = [
 		{
 			icon: '⚡',
@@ -49,13 +51,13 @@
 	</p>
 	<div class="mt-10 flex flex-col gap-4 sm:flex-row">
 		<a
-			href="/register"
+			href={resolve('/register')}
 			class="rounded-lg bg-primary px-6 py-3 font-semibold text-primary-foreground transition-colors hover:bg-purple-700"
 		>
 			Sign up free
 		</a>
 		<a
-			href="/demo"
+			href={resolve('/demo')}
 			class="rounded-lg border border-border px-6 py-3 font-semibold text-foreground transition-colors hover:bg-muted"
 		>
 			Live demo →
@@ -70,7 +72,7 @@
 			Built for teams who move fast and can't afford things to break.
 		</p>
 		<div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-			{#each features as f}
+			{#each features as f (f.title)}
 				<div class="rounded-2xl border border-border bg-muted p-6">
 					<div class="mb-4 text-3xl">{f.icon}</div>
 					<h3 class="mb-2 text-lg font-semibold text-foreground">{f.title}</h3>
@@ -105,7 +107,7 @@
 				<p class="mt-2 text-sm text-muted-foreground">Unlimited workflows · 10 users</p>
 			</div>
 		</div>
-		<a href="/pricing" class="mt-8 inline-block text-sm text-primary hover:underline"
+		<a href={resolve('/pricing')} class="mt-8 inline-block text-sm text-primary hover:underline"
 			>See full pricing details →</a
 		>
 	</div>
@@ -118,13 +120,13 @@
 	</p>
 	<div class="flex flex-col justify-center gap-4 sm:flex-row">
 		<a
-			href="/signup"
+			href={resolve('/register')}
 			class="rounded-lg bg-primary-foreground px-6 py-3 font-semibold text-primary transition-colors hover:bg-purple-100"
 		>
 			Get started free
 		</a>
 		<a
-			href="/demo"
+			href={resolve('/demo')}
 			class="rounded-lg border border-purple-300 px-6 py-3 font-semibold text-primary-foreground transition-colors hover:bg-purple-700"
 		>
 			Watch the demo
