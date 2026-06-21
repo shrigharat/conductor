@@ -7,7 +7,7 @@ import { UserRegistrationSchema } from '$lib/zod/user';
 export const actions: Actions = {
 	default: async ({ request }) => {
 		const formData = await request.formData();
-		const email = formData.get('email')?.toString() ?? '';
+		const email = formData.get('email')?.toString().toLowerCase() ?? '';
 		const password = formData.get('password')?.toString() ?? '';
 		const parsed = UserRegistrationSchema.safeParse({ email, password });
 		if (!parsed.success) {
