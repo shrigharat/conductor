@@ -1,9 +1,23 @@
 <script lang="ts">
 	import { cn } from '$lib/lib/utils';
 
-	let { password }: { password: string } = $props();
+	let {
+		password,
+		onPasswordStrengthChange
+	}: {
+		password: string;
+		onPasswordStrengthChange: (isPasswordValid: boolean) => void;
+	} = $props();
 	let atLeastOneNumberRegex = /[0-9]+/;
 	let atLeastOneSymbolNumberRegex = /[!@#$%^&*()_+\-=[\]{};':"\\|,./?]+/;
+
+	$effect(() => {
+		let isValidPassword =
+			password.length >= 8 &&
+			atLeastOneNumberRegex.test(password) &&
+			atLeastOneSymbolNumberRegex.test(password);
+		onPasswordStrengthChange(isValidPassword);
+	});
 </script>
 
 <ul class="flex list-disc flex-col gap-1 px-3">

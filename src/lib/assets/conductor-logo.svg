@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="96" viewBox="0 0 360 96" role="img" aria-labelledby="title desc">
+  <title id="title">Conductor logo</title>
+  <desc id="desc">A circular C-shaped track with connected task checkpoints and the word conductor.</desc>
+
+  <g transform="translate(8 8)">
+    <path
+      d="M64 18 A30 30 0 1 0 64 62"
+      fill="none"
+      stroke="#0F172A"
+      stroke-width="8"
+      stroke-linecap="round"
+    />
+
+    <path
+      d="M30 56 L44 44 L58 32"
+      fill="none"
+      stroke="#14B8A6"
+      stroke-width="6"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+
+    <circle cx="30" cy="56" r="5" fill="#F59E0B"/>
+    <circle cx="44" cy="44" r="5" fill="#14B8A6"/>
+    <circle cx="58" cy="32" r="5" fill="#0F172A"/>
+  </g>
+
+  <text
+    x="92"
+    y="52"
+    fill="#0F172A"
+    font-size="38"
+    font-family="Avenir Next, Montserrat, Poppins, Segoe UI, Arial, sans-serif"
+    font-weight="700"
+    letter-spacing="0.2"
+  >conductor</text>
+</svg>

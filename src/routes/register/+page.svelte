@@ -13,6 +13,11 @@
 	let confirmPassword = $state('');
 
 	let isSubmitting = $state(false);
+	let isPasswordValid = $state(false);
+	let isConfirmPasswordValid = $derived(
+		password.length === confirmPassword.length && password === confirmPassword
+	);
+	let isFormValid = $derived(isPasswordValid && isConfirmPasswordValid);
 </script>
 
 <div class="flex h-screen flex-col items-center justify-center bg-background">
@@ -44,19 +49,38 @@
 		>
 			<div>
 				<label for="email">Email</label>
-				<Input type="email" id="email" name="email" required placeholder="john.doe@example.com" />
+				<Input
+					type="email"
+					id="email"
+					name="email"
+					required
+					placeholder="john.doe@example.com"
+					autocomplete="email"
+				/>
 			</div>
 			<div>
 				<label for="password">Password</label>
 				<div class="flex flex-col gap-2">
-					<Input type="password" id="password" name="password" required bind:value={password} />
-					<PasswordStrength {password} />
+					<Input
+						autocomplete="new-password"
+						type="password"
+						id="password"
+						name="password"
+						required
+						bind:value={password}
+					/>
+					<PasswordStrength
+						{password}
+						onPasswordStrengthChange={(newPasswordValidValue) =>
+							(isPasswordValid = newPasswordValidValue)}
+					/>
 				</div>
 			</div>
 			<div>
-				<label for="email">Confirm Password</label>
+				<label for="confirm-password">Confirm Password</label>
 				<div class="flex flex-col gap-1">
 					<Input
+						autocomplete="new-password"
 						type="password"
 						id="confirm-password"
 						name="confirm-password"
@@ -68,7 +92,7 @@
 					{/if}
 				</div>
 			</div>
-			<Button type="submit" disabled={isSubmitting}>Register</Button>
+			<Button type="submit" disabled={isSubmitting || !isFormValid}>Register</Button>
 		</form>
 	</div>
 	<p class="mt-4 text-center text-sm text-muted-foreground">
